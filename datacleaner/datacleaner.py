@@ -94,7 +94,7 @@ def autoclean(input_dataframe, drop_nans=False, copy=False, encoder=None,
                 column_encoder = LabelEncoder().fit(input_dataframe[column].values)
 
             input_dataframe[column] = column_encoder.transform(input_dataframe[column].values)
-
+    input_dataframe.columns =  [c.strip() for c in input_dataframe.columns] #Remove spaces around data 
     return input_dataframe
 
 def autoclean_cv(training_dataframe, testing_dataframe, drop_nans=False, copy=False,
@@ -171,9 +171,7 @@ def autoclean_cv(training_dataframe, testing_dataframe, drop_nans=False, copy=Fa
             else:
                 column_encoder = LabelEncoder().fit(training_dataframe[column].values)
 
-            training_dataframe[column] = column_encoder.transform(training_dataframe[column].values)
-            testing_dataframe[column] = column_encoder.transform(testing_dataframe[column].values)
-
+             
     return training_dataframe, testing_dataframe
 
 
